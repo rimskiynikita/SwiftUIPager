@@ -45,6 +45,9 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
     /// A ratio of 3, for instance, would mean the items held in memory are enough
     /// to cover 3 times the size of the pager
     let recyclingRatio = 5
+    
+    /// Duration of selecting page switcheng animation
+    let animationDuration: Double = 0.3
 
     /// Angle of rotation when should rotate
     let rotationDegrees: Double = 20
@@ -101,9 +104,6 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
     /// Will apply this ratio to each page item. The aspect ratio follows the formula _width / height_
     var itemAspectRatio: CGFloat?
 
-    /// Callback for every new page
-    var onPageChanged: ((Int) -> Void)?
-
     /*** State and Binding properties ***/
 
     /// Size of the view
@@ -116,11 +116,7 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
     @State var draggingStartTime: Date! = nil
 
     /// Page index
-    @Binding var pageIndex: Int {
-        didSet {
-            onPageChanged?(page)
-        }
-    }
+    @Binding var pageIndex: Int
 
     /// Initializes a new `Pager`.
     ///
@@ -147,6 +143,7 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
                                       axis: self.axis(for: item))
             }
             .offset(x: self.xOffset, y : self.yOffset)
+            .animation(.easeOut(duration: animationDuration))
         }
         .frame(size: size)
 
@@ -156,11 +153,7 @@ public struct Pager<Element, ID, PageView>: View  where PageView: View, Element:
             .rotation3DEffect((isHorizontal ? .zero : Angle(degrees: 90)) + scrollDirectionAngle,
                               axis: (0, 0, 1))
             .sizeTrackable($size)
-            .onAppear(perform: {
-                self.onPageChanged?(self.page)
-            })
     }
-
 }
 
 extension Pager where ID == Element.ID, Element : Identifiable {
@@ -218,9 +211,7 @@ extension Pager {
                     self.draggingOffset = 0
                     self.draggingStartTime = nil
                 }
-
             }
         )
     }
-
 }

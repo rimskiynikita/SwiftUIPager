@@ -27,15 +27,10 @@ struct ColorsExampleView: View {
                     }
                     .itemSpacing(10)
                     .padding(20)
-                    .onPageChanged({ page in
-                        withAnimation {
-                            self.pageIndex = page
-                        }
-                    })
-                        .frame(width: min(proxy.size.height, proxy.size.width),
-                               height: min(proxy.size.height, proxy.size.width))
-                        .background(Color.gray.opacity(0.3))
-                        .navigationBarTitle("Color Picker", displayMode: .inline)
+                    .frame(width: min(proxy.size.height, proxy.size.width),
+                           height: min(proxy.size.height, proxy.size.width))
+                    .background(Color.gray.opacity(0.3))
+                    .navigationBarTitle("Color Picker", displayMode: .inline)
                     
                     Spacer()
                     

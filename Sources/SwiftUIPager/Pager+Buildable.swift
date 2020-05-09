@@ -115,11 +115,6 @@ extension Pager: Buildable {
         itemAspectRatio(nil)
     }
 
-    /// Adds a callback to react to every change on the page index.
-    public func onPageChanged(_ onPageChanged: ((Int) -> Void)?) -> Self {
-        mutating(keyPath: \.onPageChanged, value: onPageChanged)
-    }
-
     public func padding(_ length: CGFloat) -> Self {
         padding(.all, length)
     }

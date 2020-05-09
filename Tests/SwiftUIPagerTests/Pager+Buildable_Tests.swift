@@ -205,20 +205,6 @@ final class Pager_Buildable_Tests: XCTestCase {
         pager = pager.padding(5)
         XCTAssertEqual(pager.sideInsets, 5)
     }
-    
-    func test_GivenPager_WhenOnPageChanged_ThenObservePageChanges() {
-        var pager = givenPager
-        
-        var newPage: Int! = nil
-        pager = pager.onPageChanged({ (page) in
-            newPage = page
-        })
-        
-        pager.pageIndex = 3
-        
-        XCTAssertNotNil(newPage)
-        XCTAssertEqual(pager.page, newPage)
-    }
 
     static var allTests = [
         ("test_GivenPager_ThenDefaultValues", test_GivenPager_ThenDefaultValues),
@@ -245,8 +231,6 @@ final class Pager_Buildable_Tests: XCTestCase {
         ("test_GivenHorizontalPager_WhenPaddingVertical_ThenMinTopAndBottom", test_GivenHorizontalPager_WhenPaddingVertical_ThenMinTopAndBottom),
         ("test_GivenVerticalPager_WhenPaddingHorizontal_ThenMinLeadingAndTrailing", test_GivenVerticalPager_WhenPaddingHorizontal_ThenMinLeadingAndTrailing),
         ("test_GivenHorizontalPager_WhenPaddingVertical_ThenDefaultInsets", test_GivenHorizontalPager_WhenPaddingVertical_ThenDefaultInsets),
-        ("test_GivenHorizontalPager_WhenPadding_ThenDefaultLengthVerticalInsets", test_GivenHorizontalPager_WhenPadding_ThenDefaultLengthVerticalInsets),
-        ("test_GivenPager_WhenOnPageChanged_ThenObservePageChanges", test_GivenPager_WhenOnPageChanged_ThenObservePageChanges),
         ("test_GivenPager_WhenSwipeInteractionAreaAllAvailable_ThenAllAvailable", test_GivenPager_WhenSwipeInteractionAreaAllAvailable_ThenAllAvailable),
         ("test_GivenAllnteractionAreaPager_WhenSwipeInteractionAreaPage_ThenPage", test_GivenAllnteractionAreaPager_WhenSwipeInteractionAreaPage_ThenPage),
         ("test_GivenPager_WhenItemAspectAlignmentEnd_ThenItemAlignmentEnd", test_GivenPager_WhenItemAspectAlignmentEnd_ThenItemAlignmentEnd),

@@ -126,17 +126,6 @@ Pager(...)
 
 <img src="resources/pager-rotation3D.gif" alt="Rotation 3D" height="640"/>
 
-### Events
-
-Use `onPageChanged` to react to any change on the page index:
-
-```swift
-Pager(...)
-     .onPageChanged({ (newIndex) in
-         // do something
-     })
-```
-
 ### Sample projects
 
 You can use `Pager` to implement cool effects as in [iPod](https://github.com/fermoya/iPod)
