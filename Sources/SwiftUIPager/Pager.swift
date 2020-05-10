@@ -193,12 +193,15 @@ extension Pager {
     /// `DragGesture` customized to work with `Pager`
     var swipeGesture: some Gesture {
         DragGesture()
-            .onChanged({ value in
+            .onChanged { value in
+                guard abs(value.translation.width) > abs(value.translation.height) else { return }
                 withAnimation {
                     self.draggingStartTime = self.draggingStartTime ?? value.time
                     self.draggingOffset = value.translation.width
                 }
-            }).onEnded({ (value) in
+            }
+            .onEnded { value in
+                guard abs(value.translation.width) > abs(value.translation.height) else { return }
                 let velocity = -Double(value.translation.width) / value.time.timeIntervalSince(self.draggingStartTime ?? Date())
                 var newPage = self.currentPage
                 if newPage == self.page, abs(velocity) > 1000 {
@@ -212,6 +215,5 @@ extension Pager {
                     self.draggingStartTime = nil
                 }
             }
-        )
     }
 }

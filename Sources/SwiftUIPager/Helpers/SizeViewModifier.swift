@@ -29,9 +29,7 @@ struct SizeViewModifier: ViewModifier {
                     }
                 }
         }
-        .clipped()
     }
-
 }
 
 extension View {
